@@ -2,240 +2,110 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Heatband</title>
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#667eea">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智慧單車安全伴行系統</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
-    
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 15px;
-      overflow-x: hidden;
-    }
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 30px;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    }
-    .card {
-      width: 100%;
-      max-width: 380px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
-      padding: 35px 25px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      text-align: center;
-    }
-
-    /* 大電源按鈕 */
-    #powerBtn {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: none;
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: white;
-      margin: 15px auto;
-      background: #ff4757;
-      box-shadow: 0 10px 30px rgba(255,71,87,0.6);
-      transition: all 0.3s;
-    }
-    #powerBtn.on {
-      background: #2ed573;
-      box-shadow: 0 10px 30px rgba(46,213,115,0.6);
-    }
-    #powerBtn:active { transform: scale(0.93); }
-
-    /* 模式按鈕 */
-    .modes {
-      display: flex;
-      gap: 12px;
-      margin: 35px 0;
-    }
-    .mode {
-      flex: 1;
-      padding: 16px 8px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.2);
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-    .mode.active {
-      background: rgba(255,255,255,0.4);
-      border-color: #fff;
-      font-weight: 700;
-      transform: scale(1.05);
-    }
-
-    /* 溫度 + 時間 並排顯示 */
-    .data-area {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 40px 0;
-      padding: 0 20px;
-    }
-    .temp-box {
-      text-align: left;
-    }
-    .temp-label { font-size: 1.1rem; opacity: 0.9; }
-    #temperature {
-      font-size: 4.5rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-top: 8px;
-    }
-    .warning { color: #ff6b6b !important; animation: blink 1s infinite; }
-    @keyframes blink { 50% { opacity: 0.6; } }
-
-    .timer-box {
-      text-align: right;
-    }
-    .timer-label { font-size: 1.1rem; opacity: 0.9; }
-    #timer {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-top: 8px;
-    }
-
-    #status {
-      margin-top: 20px;
-      font-size: 1.1rem;
-      min-height: 28px;
-    }
+    :root{--bg:#08101c;--card:#111b2e;--text:#f4f7ff;--muted:#98a6c2;--green:#37d39f;--orange:#ff9f43;--red:#ff5f6d;--cyan:#4ecdc4;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;color:var(--text);background:radial-gradient(circle at top left, rgba(78,205,196,.14), transparent 28%),radial-gradient(circle at bottom right, rgba(255,95,109,.12), transparent 26%),var(--bg);padding:28px}
+    .wrap{max-width:1400px;margin:0 auto}.title h1{margin:0 0 8px;font-size:42px;letter-spacing:.04em}.title p{margin:0 0 18px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(320px,1fr));gap:24px}.phone-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid var(--line);border-radius:32px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+    .card-label{margin:0 0 14px;color:var(--muted);font-size:14px}.phone{position:relative;overflow:hidden;min-height:700px;border-radius:28px;background:linear-gradient(180deg,#0c1527,#09111d);border:1px solid rgba(255,255,255,.08);padding:22px}
+    .status{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-bottom:16px}.app-name{font-size:14px;letter-spacing:.08em;color:#dce7ff}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.section-title h2{margin:0;font-size:28px;letter-spacing:.03em}
+    .pill{border:1px solid rgba(56,211,159,.25);color:var(--green);background:rgba(56,211,159,.12);padding:8px 12px;border-radius:999px;font-size:12px;font-weight:700}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px}.metric{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px}.metric .k{color:var(--muted);font-size:13px;margin-bottom:10px}.metric .v{font-size:42px;line-height:1;font-weight:800}.metric small{font-size:16px;color:var(--cyan)}
+    .bike-panel{background:linear-gradient(180deg, rgba(78,205,196,.09), rgba(255,255,255,.02));border:1px solid rgba(78,205,196,.18);border-radius:28px;padding:20px;margin-bottom:20px}.bike-track{margin-top:16px;height:170px;border-radius:22px;position:relative;background:#0c162a;border:1px solid rgba(255,255,255,.06);overflow:hidden}.road{position:absolute;inset:18px;border-radius:90px;border:18px solid #25344f;border-right-width:36px;transform:rotate(-8deg);opacity:.95}.bike-dot{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--green);box-shadow:0 0 0 10px rgba(56,211,159,.16);left:28%;bottom:36px}
+    .buttons{display:grid;grid-template-columns:1fr 1fr;gap:14px}.btn{border:none;border-radius:20px;padding:18px 16px;font-size:18px;font-weight:800;letter-spacing:.03em}.btn.primary{background:var(--green);color:#04140f}.btn.secondary{background:#20304f;color:var(--text);border:1px solid var(--line)}
+    .alert-strip{background:linear-gradient(90deg, rgba(255,159,67,.28), rgba(255,95,109,.18));color:#ffd9b5;border:1px solid rgba(255,159,67,.35);border-radius:20px;padding:14px 16px;font-weight:700;margin-bottom:16px}.map{background:linear-gradient(180deg,#122136,#0d1727);border:1px solid var(--line);border-radius:30px;min-height:410px;padding:24px;position:relative;overflow:hidden;margin-bottom:18px}.map svg{width:100%;height:100%;min-height:360px}.voice{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+    .danger-screen{background:radial-gradient(circle at top, rgba(255,95,109,.2), transparent 30%),linear-gradient(180deg,#18090c,#0f090c);border:2px solid rgba(255,95,109,.55);box-shadow:inset 0 0 0 4px rgba(255,95,109,.14),0 0 32px rgba(255,95,109,.15);animation:pulse 1.15s infinite}@keyframes pulse{0%,100%{box-shadow:inset 0 0 0 4px rgba(255,95,109,.14),0 0 20px rgba(255,95,109,.12)}50%{box-shadow:inset 0 0 0 6px rgba(255,95,109,.22),0 0 44px rgba(255,95,109,.24)}}
+    .warning-center{min-height:560px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:18px}.warning-center .big{font-size:64px;font-weight:800;letter-spacing:.05em;color:#ffd3d8}.warning-center .reason{font-size:24px;color:#ffb1ba;font-weight:700}.icons{display:flex;gap:14px}.icon{width:66px;height:66px;border-radius:18px;display:grid;place-items:center;background:rgba(255,95,109,.12);border:1px solid rgba(255,95,109,.26);font-size:28px}
+    .report-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px}.report-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px}.report-card h3{margin:0 0 8px;font-size:14px;color:var(--muted);font-weight:600}.report-card .num{font-size:40px;font-weight:800;line-height:1}.list{display:grid;gap:12px}.list-item{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}.tag{border-radius:999px;padding:6px 10px;font-size:12px;font-weight:700}.tag.orange{color:#ffd8aa;background:rgba(255,159,67,.14)}.tag.red{color:#ffc3cb;background:rgba(255,95,109,.14)}
+    .bottom-nav{position:absolute;left:22px;right:22px;bottom:18px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;overflow:hidden}.bottom-nav div{padding:14px 6px;color:var(--muted);font-size:12px;font-weight:700}.bottom-nav div.active{background:rgba(78,205,196,.12);color:var(--cyan)}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}.phone{min-height:620px}}
   </style>
 </head>
 <body>
-  <h1>Heatband</h1>
-
-  <div class="card">
-    <button id="powerBtn">OFF</button>
-
-    <div class="modes">
-      <button class="mode active" data-mode="bottle">水樽加熱</button>
-      <button class="mode" data-mode="pet">寵物保暖</button>
-      <button class="mode" data-mode="health">熱敷保健</button>
-    </div>
-
-    <div class="data-area">
-      <div class="temp-box">
-        <div class="temp-label">目前溫度</div>
-        <div id="temperature">-- °C</div>
-      </div>
-      <div class="timer-box">
-        <div class="timer-label">加熱時間</div>
-        <div id="timer">00:00</div>
-      </div>
-    </div>
-
-    <div id="status">點擊上方按鈕開機</div>
+<div class="wrap">
+  <div class="title">
+    <h1>智慧單車安全伴行系統</h1>
+    <p>四頁 Web App 版面草圖：騎行模式、地形預警、即時警報、紀錄報告。設計以單車電腦風格為主，方便評審快速掌握功能重點。</p>
   </div>
-
-  <script>
-    const powerBtn = document.getElementById('powerBtn');
-    const tempEl = document.getElementById('temperature');
-    const timerEl = document.getElementById('timer');
-    const statusEl = document.getElementById('status');
-    const modes = document.querySelectorAll('.mode');
-
-    let isOn = false;
-    let mode = 'bottle';
-    let currentTemp = 25.0;
-    const target = { bottle: 55, pet: 38, health: 45 };
-    let seconds = 0;
-    let timerInt, tempInt;
-
-    powerBtn.onclick = () => {
-      isOn = !isOn;
-      powerBtn.classList.toggle('on', isOn);
-      powerBtn.textContent = isOn ? 'ON' : 'OFF';
-
-      if (isOn) {
-        statusEl.textContent = `${getModeName(mode)} 模式啟動中…`;
-        startTimer();
-        startTempControl();
-      } else {
-        statusEl.textContent = '已關機';
-        stopAll();
-      }
-    };
-
-    modes.forEach(m => {
-      m.onclick = () => {
-        modes.forEach(x => x.classList.remove('active'));
-        m.classList.add('active');
-        mode = m.dataset.mode;
-        if (isOn) statusEl.textContent = `${getModeName(mode)} 模式啟動中…`;
-      };
-    });
-
-    function getModeName(m) {
-      return document.querySelector(`[data-mode="${m}"]`).textContent;
-    }
-
-    function startTimer() {
-      seconds = 0;
-      timerEl.textContent = '00:00';
-      timerInt = setInterval(() => {
-        seconds++;
-        let m = String(Math.floor(seconds/60)).padStart(2,'0');
-        let s = String(seconds%60).padStart(2,'0');
-        timerEl.textContent = `${m}:${s}`;
-
-        // 30分鐘自動關機
-        if (seconds >= 1800) {
-          alert('已達30分鐘最長使用時間，自動關機保護');
-          powerBtn.click();
-        }
-      }, 1000);
-    }
-
-    function startTempControl() {
-      tempInt = setInterval(() => {
-        let tgt = target[mode];
-
-        // 模擬溫度變化（實際專案請換成從 micro:bit 讀取）
-        if (currentTemp < tgt - 1) {
-          currentTemp += 0.5 + Math.random()*0.5;
-        } else if (currentTemp > tgt + 1) {
-          currentTemp -= 0.3;
-        }
-
-        // 高溫保護 >62°C
-        if (currentTemp > 62) {
-          tempEl.classList.add('warning');
-          statusEl.textContent = '危險 高溫警告！3秒後自動關機';
-          setTimeout(() => powerBtn.click(), 3000);
-        } else {
-          tempEl.classList.remove('warning');
-        }
-
-        tempEl.textContent = currentTemp.toFixed(1) + ' °C';
-      }, 1200);
-    }
-
-    function stopAll() {
-      clearInterval(timerInt);
-      clearInterval(tempInt);
-      currentTemp = 25.0;
-      tempEl.textContent = '-- °C';
-      timerEl.textContent = '00:00';
-      tempEl.classList.remove('warning');
-    }
-  </script>
+  <div class="grid">
+    <section class="phone-card">
+      <p class="card-label">(1) 主頁 / 騎行模式</p>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="app-name">騎行模式</span><span>藍牙 • 92%</span></div>
+        <div class="section-title"><h2>騎行模式</h2><span class="pill">已連線</span></div>
+        <div class="metrics">
+          <div class="metric"><div class="k">速度</div><div class="v">18 <small>公里／小時</small></div></div>
+          <div class="metric"><div class="k">傾斜角</div><div class="v">8 <small>°</small></div></div>
+        </div>
+        <div class="bike-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+            <div><div style="font-size:13px;color:var(--muted);margin-bottom:6px;">騎行狀態</div><div style="font-size:26px;font-weight:800;">安全騎行</div></div>
+            <div style="color:var(--green);font-weight:800;">裝置已連接</div>
+          </div>
+          <div class="bike-track"><div class="road"></div><div class="bike-dot"></div></div>
+        </div>
+        <div class="buttons"><button class="btn primary">開始騎行</button><button class="btn secondary">警報設定</button></div>
+        <div class="bottom-nav"><div class="active">騎行</div><div>地圖</div><div>警報</div><div>報告</div></div>
+      </div>
+    </section>
+    <section class="phone-card">
+      <p class="card-label">(2) 地形預警頁</p>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="app-name">地形預警</span><span>語音已開啟</span></div>
+        <div class="section-title"><h2>地形預警</h2><span class="pill" style="color:#ffd3a1;border-color:rgba(255,159,67,.3);background:rgba(255,159,67,.12);">語音提示已開啟</span></div>
+        <div class="alert-strip">前方15米有斜路</div>
+        <div class="alert-strip" style="margin-top:-4px;background:linear-gradient(90deg, rgba(255,95,109,.22), rgba(255,159,67,.18));border-color:rgba(255,95,109,.3);">前方20米有急彎</div>
+        <div class="map">
+          <svg viewBox="0 0 360 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="18" y="18" width="324" height="384" rx="28" fill="#0a1320" stroke="rgba(255,255,255,.06)"/>
+            <path d="M75 340C110 290 102 248 145 210C181 178 215 188 246 145C268 115 282 84 301 58" stroke="#2b3b59" stroke-width="56" stroke-linecap="round"/>
+            <path d="M75 340C110 290 102 248 145 210C181 178 215 188 246 145C268 115 282 84 301 58" stroke="#dce7ff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round" stroke-dasharray="14 12"/>
+            <circle cx="76" cy="340" r="14" fill="#38d39f"/><circle cx="246" cy="145" r="18" fill="#ff9f43"/><circle cx="301" cy="58" r="18" fill="#ff5f6d"/>
+            <rect x="183" y="108" width="112" height="34" rx="17" fill="rgba(255,159,67,.18)" stroke="rgba(255,159,67,.35)"/><text x="194" y="130" fill="#ffd5ae" font-size="14" font-family="Arial">斜路 15米</text>
+            <rect x="238" y="24" width="92" height="34" rx="17" fill="rgba(255,95,109,.18)" stroke="rgba(255,95,109,.35)"/><text x="251" y="46" fill="#ffd3d8" font-size="14" font-family="Arial">急彎 20米</text>
+          </svg>
+        </div>
+        <div class="voice"><span>語音提示狀態</span><strong style="color:#ffd3a1;">開啟</strong></div>
+        <div class="bottom-nav"><div>騎行</div><div class="active">地圖</div><div>警報</div><div>報告</div></div>
+      </div>
+    </section>
+    <section class="phone-card">
+      <p class="card-label">(3) 即時警報頁</p>
+      <div class="phone danger-screen">
+        <div class="status"><span>9:41</span><span class="app-name">即時警報</span><span>緊急</span></div>
+        <div class="warning-center">
+          <div style="font-size:18px;color:#ffb7c0;font-weight:700;letter-spacing:.08em;">警告</div>
+          <div class="big">請減速！</div>
+          <div class="reason">車速過快／傾斜角度過大</div>
+          <div class="icons"><div class="icon">🔊</div><div class="icon">📳</div><div class="icon">⚠️</div></div>
+          <div style="margin-top:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,95,109,.28);padding:14px 18px;border-radius:18px;color:#ffd3d8;font-weight:700;">已發送語音警告 · 已通知智能手錶</div>
+        </div>
+        <div class="bottom-nav"><div>騎行</div><div>地圖</div><div class="active">警報</div><div>報告</div></div>
+      </div>
+    </section>
+    <section class="phone-card">
+      <p class="card-label">(4) 紀錄 / 安全報告頁</p>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="app-name">安全報告</span><span>今日</span></div>
+        <div class="section-title"><h2>安全報告</h2><span class="pill" style="border-color:rgba(78,205,196,.2);">今日</span></div>
+        <div class="report-grid">
+          <div class="report-card"><h3>斜路警報</h3><div class="num">2</div></div>
+          <div class="report-card"><h3>傾斜警告</h3><div class="num">1</div></div>
+          <div class="report-card"><h3>超速警告</h3><div class="num">3</div></div>
+          <div class="report-card"><h3>安全騎行分數</h3><div class="num">87</div></div>
+        </div>
+        <div class="list">
+          <div class="list-item"><span>08:42 · 已觸發斜路警報</span><span class="tag orange">斜路</span></div>
+          <div class="list-item"><span>08:55 · 已發送急彎語音提示</span><span class="tag orange">急彎</span></div>
+          <div class="list-item"><span>09:03 · 傾斜角度過大</span><span class="tag red">傾斜</span></div>
+        </div>
+        <div class="bottom-nav"><div>騎行</div><div>地圖</div><div>警報</div><div class="active">報告</div></div>
+      </div>
+    </section>
+  </div>
+</div>
 </body>
 </html>
